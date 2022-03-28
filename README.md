@@ -2,3 +2,4 @@ Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/ra
 # roof_calculator
 # roof_calculator
 # roofing-calculator
+# roofing-calculator
