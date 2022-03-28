@@ -1,12 +1,14 @@
 require "uri"
 require "net/http"
+require "json"
 
 class BuildingsController < ApplicationController
-  before_action :params_id, only: %i[show create update destroy]
+  before_action :set_building, only: %i[show edit update destroy]
 
   def index
     @buildings = Building.all
     geometry
+    northeast
   end
 
   def show
@@ -18,7 +20,19 @@ class BuildingsController < ApplicationController
 
   def create
     @building = Building.new(set_params)
-    @building.save!
+    if @building.save
+      result = search_api(@building.address)
+      @building.lat = result['candidates'][0]['geometry']['location']['lat']
+      @building.lng = result['candidates'][0]['geometry']['location']['lng']
+      @building.ne_lat = result['candidates'][0]['geometry']['viewport']['northeast']['lat']
+      @building.ne_lng = result['candidates'][0]['geometry']['viewport']['northeast']['lng']
+      @building.sw_lat = result['candidates'][0]['geometry']['viewport']['southwest']['lat']
+      @building.sw_lng = result['candidates'][0]['geometry']['viewport']['southwest']['lng']
+      @building.save
+      raise
+    else
+      render :new
+    end
   end
 
   def edit
@@ -32,10 +46,9 @@ class BuildingsController < ApplicationController
     @building.delete
   end
 
-  def geometry
-    @reponse = search_request("21 rue Lamartine")
+  def search_api(string = "21 rue Antoine Siger 97200 Martinique")
+    @response = search_request(string)
   end
-
 
   private
 
@@ -43,7 +56,7 @@ class BuildingsController < ApplicationController
     params.require(:building).permit(:address, :lat, :lng, :ne_lng, :ne_lat, :sw_lat, :sw_lng, :surface, :nom)
   end
 
-  def params_id
+  def set_building
     @building = Building.find(params[:id])
   end
 
@@ -61,5 +74,6 @@ class BuildingsController < ApplicationController
 
     response = https.request(request)
     response.read_body
+    JSON.parse(response.read_body, object_class: Hash)
   end
 end
