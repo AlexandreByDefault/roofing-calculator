@@ -14,8 +14,8 @@ class Building < ApplicationRecord
     rkm = 6371                  # Earth radius in kilometers
     rm = rkm * 1000             # Radius in meters
 
-    dlat_rad = (loc2[0]-loc1[0]) * rad_per_deg  # Delta, converted to rad
-    dlon_rad = (loc2[1]-loc1[1]) * rad_per_deg
+    dlat_rad = (loc2[0]- loc1[0]) * rad_per_deg  # Delta, converted to rad
+    dlon_rad = (loc2[1] - loc1[1]) * rad_per_deg
 
     lat1_rad, lon1_rad = loc1.map {|i| i * rad_per_deg }
     lat2_rad, lon2_rad = loc2.map {|i| i * rad_per_deg }
