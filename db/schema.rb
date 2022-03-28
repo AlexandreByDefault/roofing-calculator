@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_25_160339) do
+ActiveRecord::Schema.define(version: 2022_03_28_183859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_03_25_160339) do
     t.float "lat"
     t.float "lng"
     t.float "ne_lat"
-    t.float "ne_long"
+    t.float "ne_lng"
     t.float "sw_lat"
     t.float "sw_lng"
     t.float "surface"

@@ -1,2 +1,4 @@
 
-<h1><%= @reponse %></h1>
+<% @buildings.each_with_index do |building, index| %>
+  <%= index %> - <%= building.address %> - <%= building.lat %> - <%= building.lng %>
+<% end %>
