@@ -36,7 +36,6 @@ class BuildingsController < ApplicationController
     @reponse = search_request("21 rue Lamartine")
   end
 
-
   private
 
   def set_params
