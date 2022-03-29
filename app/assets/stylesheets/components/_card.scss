@@ -1,0 +1,35 @@
+.title{
+  text-align: center;
+  font-weight: 900;
+}
+.container-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  justify-items: center;
+
+  .list{
+    padding: 25px;
+    list-style: none;
+    background-color: #DDDDDD;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+}
+.link{
+  color: black;
+  text-decoration: none;
+  background-color: #7fff00;
+  border-radius: 5px;
+  P
+  &:hover{
+    color: green;
+  }
+}
+.li-element{
+  .infos-location{
+    background-color: #251F47;
+    border-radius: 5px;
+    color: white;
+  }
+
+}

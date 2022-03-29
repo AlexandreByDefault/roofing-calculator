@@ -20,6 +20,7 @@ class BuildingsController < ApplicationController
     @building = Building.new(set_params)
     if @building.save
       result = search_request(@building.address)
+      @building.address = result["candidates"][0]["formatted_address"]
       @building.lat = result['candidates'][0]['geometry']['location']['lat']
       @building.lng = result['candidates'][0]['geometry']['location']['lng']
       @building.ne_lat = result['candidates'][0]['geometry']['viewport']['northeast']['lat']
