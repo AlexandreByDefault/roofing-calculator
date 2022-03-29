@@ -7,8 +7,6 @@ class BuildingsController < ApplicationController
 
   def index
     @buildings = Building.all
-    geometry
-    northeast
   end
 
   def show
@@ -21,7 +19,7 @@ class BuildingsController < ApplicationController
   def create
     @building = Building.new(set_params)
     if @building.save
-      result = search_api(@building.address)
+      result = search_request(@building.address)
       @building.lat = result['candidates'][0]['geometry']['location']['lat']
       @building.lng = result['candidates'][0]['geometry']['location']['lng']
       @building.ne_lat = result['candidates'][0]['geometry']['viewport']['northeast']['lat']
@@ -29,7 +27,6 @@ class BuildingsController < ApplicationController
       @building.sw_lat = result['candidates'][0]['geometry']['viewport']['southwest']['lat']
       @building.sw_lng = result['candidates'][0]['geometry']['viewport']['southwest']['lng']
       @building.save
-      raise
     else
       render :new
     end
@@ -44,10 +41,6 @@ class BuildingsController < ApplicationController
 
   def destroy
     @building.delete
-  end
-
-  def search_api(string = "21 rue Antoine Siger 97200 Martinique")
-    @response = search_request(string)
   end
 
   private
@@ -65,7 +58,8 @@ class BuildingsController < ApplicationController
   end
 
   def search_request(string)
-    url = URI("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{string}&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key=#{google_place_api}")
+    ascii_string = ActiveSupport::Inflector.transliterate(string)
+    url = URI("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{ascii_string}&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key=#{google_place_api}")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
