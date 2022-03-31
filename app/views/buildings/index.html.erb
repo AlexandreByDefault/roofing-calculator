@@ -1,18 +1,19 @@
-<h2 class="title">BUILDING THAT EXIST IN DATA BASE </h2>
-<div class="container-list">
-<% @buildings.each do |building| %>
-  <ul class="list">
-    <li class="li-element" >
-      <span class="infos-location"> Address </span> <%= building.address %>
-    </li>
-    <li class="li-element" >
-      <span class="infos-location"> Lat </span> <%= building.lat %>
-    </li>
-    <li class="li-element" >
-      <span class="infos-location"> Longitude </span> <%= building.lng %>
-    </li>
-    <%= link_to "View More", building_path(building), class: "btn link"%>
-  </ul>
-  <% end %>
 
+<div class="container-list pt-2">
+<% @buildings.each do |building| %>
+  <%= link_to  building_path(building), class: "link" do %>
+
+    <ul class="ul-list">
+      <li class="li-element" >
+        <span class="infos-location"> Address :</span> <%= building.address %>
+      </li>
+      <li class="li-element" >
+        <span class="infos-location"> Lat : </span> <%= building.lat %>
+      </li>
+      <li class="li-element" >
+        <span class="infos-location"> Longitude : </span> <%= building.lng %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>
 </div>

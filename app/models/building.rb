@@ -1,4 +1,7 @@
 class Building < ApplicationRecord
+
+  validates :address, :lat, :lng, presence: true
+
   def diagonal
     distance([ne_lat, ne_lng],[sw_lat, sw_lng])
   end
