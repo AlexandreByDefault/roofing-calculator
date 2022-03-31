@@ -28,6 +28,7 @@ class BuildingsController < ApplicationController
       @building.sw_lat = result['candidates'][0]['geometry']['viewport']['southwest']['lat']
       @building.sw_lng = result['candidates'][0]['geometry']['viewport']['southwest']['lng']
       @building.save
+      redirect_to building_path(@building)
     else
       render :new
     end
