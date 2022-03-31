@@ -1,0 +1,52 @@
+.card-trip {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.card-trip > img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+.card-trip h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+.card-trip p {
+  border-radius: 5px;
+  .infos-address{
+  border-radius: 5px;
+  font-weight: lighter;
+  background-color: blue;
+  color: white;
+  .infos-diagonal{
+   border-radius: 5px;
+  font-weight: lighter;
+  background-color: blue;
+  color: white;
+  }
+  .infos-surface{
+  border-radius: 5px;
+  font-weight: lighter;
+  background-color: blue;
+  color: white;
+  }
+}
+}
+.btn-gradient {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  background: linear-gradient(#167FFB, #0F60C4);
+  transition: background 0.3s ease;
+  border: 1px solid #0F60C4;
+}
+.card-trip .card-trip-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
