@@ -3,15 +3,15 @@
 <% @buildings.each do |building| %>
   <ul class="list">
     <li class="li-element" >
-      <span class="infos-location"> Address :</span> <%= building.address %>
+      <span class="infos-location"> Address </span> <%= building.address %>
     </li>
     <li class="li-element" >
-      <span class="infos-location"> Lat :</span> <%= building.lat %>
+      <span class="infos-location"> Lat </span> <%= building.lat %>
     </li>
     <li class="li-element" >
-      <span class="infos-location"> Longitude : </span> <%= building.lng %>
+      <span class="infos-location"> Longitude </span> <%= building.lng %>
     </li>
-    <%= link_to "View More", building_path(building), class: "link"%>
+    <%= link_to "View More", building_path(building), class: "btn link"%>
   </ul>
   <% end %>
 
