@@ -18,8 +18,8 @@ class BuildingsController < ApplicationController
 
   def create
     @building = Building.new(set_params)
-    if @building.save
-      result = search_request(@building.address)
+    result = search_request(@building.address)
+    unless result["candidates"].count == 0
       @building.address = result["candidates"][0]["formatted_address"]
       @building.lat = result['candidates'][0]['geometry']['location']['lat']
       @building.lng = result['candidates'][0]['geometry']['location']['lng']
@@ -27,7 +27,9 @@ class BuildingsController < ApplicationController
       @building.ne_lng = result['candidates'][0]['geometry']['viewport']['northeast']['lng']
       @building.sw_lat = result['candidates'][0]['geometry']['viewport']['southwest']['lat']
       @building.sw_lng = result['candidates'][0]['geometry']['viewport']['southwest']['lng']
-      @building.save
+    end
+    if @building.save
+      # @building.save
       redirect_to building_path(@building)
     else
       render :new
