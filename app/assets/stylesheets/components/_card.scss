@@ -3,13 +3,14 @@
   font-weight: 900;
 }
 .container-list{
+
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   justify-items: center;
 
   .list{
-    padding: 25px;
+    padding: 45px;
     list-style: none;
     background-color: #DDDDDD;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
