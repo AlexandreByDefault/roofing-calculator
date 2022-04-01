@@ -1,5 +1,5 @@
 class Building < ApplicationRecord
-  validates :address, :lat, :lng, acceptance: { message: 'do not exist, try again' }
+  validates :address, :lat, :lng, presence: true, acceptance: { message: 'do not exist, try again' }
 
   def diagonal
     distance([ne_lat, ne_lng],[sw_lat, sw_lng])
