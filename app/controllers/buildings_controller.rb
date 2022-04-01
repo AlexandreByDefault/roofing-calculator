@@ -29,10 +29,10 @@ class BuildingsController < ApplicationController
       @building.sw_lng = result['candidates'][0]['geometry']['viewport']['southwest']['lng']
     end
     if @building.save
-      # @building.save
       redirect_to building_path(@building)
     else
-      render :new
+      redirect_to new_building_path
+      flash.alert = "Address invalid"
     end
   end
 

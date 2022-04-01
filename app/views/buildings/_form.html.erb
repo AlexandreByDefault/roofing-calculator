@@ -1,7 +1,7 @@
 <div class="container">
 <%= simple_form_for @building do |f| %>
-  <%= f.input :address, placeholder: "10 Rue Martin Luther King, Le François 97240, Martinique" %>
-  <%= f.submit "search", class: "btn" %>
+  <%= f.input :address, placeholder: "10 Rue Martin Luther King, Le François 97240, Martinique", autocomplete: true, required: "required " %>
+  <%= f.submit %>
 <% end %>
 
 </div>
