@@ -27,7 +27,10 @@ gem 'redis', '~> 4.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-
+gem "geocoder"
+# Add map and autocomplete feature
+gem 'parser', '2.4.0.2'
+# parser gem
 gem 'devise'
 gem 'rack-cors', require: 'rack/cors'
 gem 'cloudinary', '~> 1.16.0'
