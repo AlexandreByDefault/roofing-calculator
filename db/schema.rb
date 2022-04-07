@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_143732) do
+ActiveRecord::Schema.define(version: 2022_03_28_183859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,15 +25,6 @@ ActiveRecord::Schema.define(version: 2022_04_04_143732) do
     t.float "sw_lng"
     t.float "surface"
     t.string "nom"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "flats", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.float "latitude"
-    t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
