@@ -1,10 +1,11 @@
 class Building < ApplicationRecord
+
   validates :address, :lat, :lng, presence: true
   geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  # after_validation :geocode, if: :will_save_change_to_address?
 
   def diagonal
-    distance([ne_lat, ne_lng],[sw_lat, sw_lng])
+  distance([ne_lat, ne_lng],[sw_lat, sw_lng])
   end
 
   def surface
@@ -29,5 +30,6 @@ class Building < ApplicationRecord
     c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1 - a))
 
     rm * c # Delta in meters
+
   end
 end

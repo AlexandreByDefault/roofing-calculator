@@ -20,6 +20,7 @@ export default class extends Controller {
       zoom : 15,
       center : [marker.lng, marker.lat]
     });
+    this.map.scrollZoom.disable();
   }
 
   }

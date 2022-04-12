@@ -1,13 +1,13 @@
 require "uri"
 require "net/http"
 require "json"
+require 'googlestaticmap'
 
 class BuildingsController < ApplicationController
   before_action :set_building, only: %i[show edit update destroy]
 
   def index
     @buildings = Building.all
-
   end
 
   def show
@@ -23,15 +23,16 @@ class BuildingsController < ApplicationController
 
   def create
     @building = Building.new(set_params)
-    result = search_request(@building.address)
-    unless result["candidates"].count == 0
-      @building.address = result["candidates"][0]["formatted_address"]
-      @building.lat = result['candidates'][0]['geometry']['location']['lat']
-      @building.lng = result['candidates'][0]['geometry']['location']['lng']
-      @building.ne_lat = result['candidates'][0]['geometry']['viewport']['northeast']['lat']
-      @building.ne_lng = result['candidates'][0]['geometry']['viewport']['northeast']['lng']
-      @building.sw_lat = result['candidates'][0]['geometry']['viewport']['southwest']['lat']
-      @building.sw_lng = result['candidates'][0]['geometry']['viewport']['southwest']['lng']
+    client = OpenStreetMap::Client.new
+    result = client.search(q: @building.address, format: 'json', addressdetails: '1', accept_language: 'fr')
+    unless result.count.zero?
+      @building.address = result[0]["display_name"]
+      @building.lat = result[0]["lat"]
+      @building.lng = result[0]["lon"]
+      @building.ne_lat = result[0]["boundingbox"][0]  #min Longitude
+      @building.ne_lng = result[0]["boundingbox"][2]  #min Latitude
+      @building.sw_lat = result[0]["boundingbox"][1] #max Longitude
+      @building.sw_lng = result[0]["boundingbox"][3] #max Latitude
     end
     if @building.save
       redirect_to building_path(@building)
